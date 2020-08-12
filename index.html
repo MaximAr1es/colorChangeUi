@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+    />
+    <style>
+      .content {
+        display: flex;
+        align-items: center;
+        margin-top: 50px;
+      }
+      .slider-wrapper {
+        margin-left: 20px;
+        width: 400px;
+        height: 150px;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+      }
+      .title {
+        padding: 50px 0;
+        border: 3px solid grey;
+        margin-left: 20px;
+      }
+      .title__text {
+        font-size: 15px;
+      }
+      .red .ui-slider-range-min{
+          background-color: red;
+      }
+      .red .ui-state-default{
+          border: 1px solid red;
+          background: #fff;
+      }
+      .green .ui-slider-range-min{
+          background-color: green;
+      }
+      .green .ui-state-default{
+          border: 1px solid green;
+          background: #fff;
+      }
+      .blue .ui-slider-range-min{
+          background-color: blue;
+      }
+      .blue .ui-state-default{
+          border: 1px solid blue;
+          background: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <form>
+      <fieldset>
+        <legend>Select:</legend>
+        <button class="btn textColor" onclick="return false;">Color</button>
+        <button class="btn bgColor" onclick="return false;">
+          backgroundColor
+        </button>
+      </fieldset>
+    </form>
+    <div class="content">
+      <div class="slider-wrapper">
+        <div class="red"></div>
+        <div class="green"></div>
+        <div class="blue"></div>
+      </div>
+      <div class="title">
+        <p class="title__text">Максим Калинин</p>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+      var color = [];
+      $(".btn").button({
+        classes: {
+          "ui-button": "highlight",
+        },
+      });
+      $(".red").slider({
+        change: function (event, ui) {
+          color[0] = $(".red").slider("option", "value");
+        },
+        max: 255,
+        range: 'min'
+      });
+      $(".green").slider({
+        change: function (event, ui) {
+          color[1] = $(".green").slider("option", "value");
+        },
+        max: 255,
+        range: 'min'
+      });
+      $(".blue").slider({
+        change: function (event, ui) {
+          color[2] = $(".blue").slider("option", "value");
+        },
+        max: 255,
+        range: 'min'
+      });
+      $(".textColor").on("click", function () {
+        var rgb = "rgb(" + color[0] + "," + color[1] + "," + color[2] + ")";
+        $(".title__text").animate({
+            color: rgb
+        });
+      });
+      $(".bgColor").on("click", function () {
+        var rgb = "rgb(" + color[0] + "," + color[1] + "," + color[2] + ")";
+        $(".title").animate({
+            backgroundColor: rgb
+        });
+      });
+    </script>
+  </body>
+</html>
